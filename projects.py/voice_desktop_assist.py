@@ -21,7 +21,9 @@ class parent():
                                              "calculator": "calc",
                                              "notepad": "notepad",
                                              "paint": "mspaint",
-                                             "vs code":"code"
+                                             "vs code":"code",
+                                             "chrome":"start chrome",
+                                             "browser":"start chrome"
                                              }
                          self.close_systemapps= {
                                              "camera": "taskkill /f /im WindowsCamera.exe",
@@ -30,6 +32,7 @@ class parent():
                                              "paint": "taskkill /f /im mspaint.exe",
                                              "vs code": "taskkill /f /im code.exe",
                                              "chrome": "taskkill /f /im chrome.exe",
+                                             "browser": "taskkill /f /im chrome.exe"
                                              }
 
 
@@ -51,15 +54,16 @@ class parent():
                                              "close yourself",
                                              "get back",
                                              "stop it",
-                                             
                                              "release",
                                              "goodbye"
                                              ]
+                         self.ai_command=["ai",'chatgpt',"deep research"]
 
 
-
+     def ai(self):
+             chatgpt=webbrowser.open_new_tab("chatgpt.com")
+             return
      def functionality(self):
-                         #  engine.setProperty('rate', 150) 
                               self.speak("OK, Hello I am a voice based desktop assistant ")
                               self.speak("I have created using the multiple python librabries")
                               self.speak("I can open the most daily apps you have to just say 'OPEN' then the app name")
@@ -113,6 +117,8 @@ class parent():
                               self.querry3=self.ob1.recognize_google(self.audio,language='eng-IN')
                               if(self.querry3=="Nothing" or self.querry3=="none"):
                                    webbrowser.open_new("https://www.google.com")
+                              elif(self.querry3=="exit Google"or self.querry3=="close Google"):
+                                      return
                               else:
                                    webbrowser.open_new(f"https://www.google.com/search?q={self.querry3}")
                               return
@@ -133,6 +139,8 @@ class parent():
                               if(self.querry3=="no"or self.querry3=="nothing"):
                                         yt=webbrowser.open_new_tab(f"https://www.youtube.com")
                                         return
+                              elif(self.querry3=="exit YouTube"or self.querry3=="close YouTube"):
+                                      return
                               else:
                                         yt=webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={self.querry3}")
                                         return
@@ -188,7 +196,11 @@ class child(parent):
                                                   if any(command in self.querry for command in self.assist_shutdown_command):
                                                        self.speak("Going to sleep...Bye")
                                                        break
-
+                                                  
+                                                  if any(j in self.querry for j in self.ai_command):
+                                                          self.ai()
+                                                          continue
+                                                  
                                                   if any(ytlists in self.querry for ytlists in self.ytlist):
                                                        self.ytctrl(m)
                                                        continue
@@ -251,10 +263,10 @@ class child(parent):
                                                   if "full screen" in self.querry:
                                                        pyautogui.press("f")
                                                        continue
-                                                  if "open portal" in self.querry or "portal open" in self.querry or "open erp"in self.querry:
+                                                  if "open portal" in self.querry or "portal open" in self.querry or "open erp"in self.querry or "college portal" in self.querry:
                                                        self.erp() 
                                                   
-                                                  if("sign off" in self.querry):
+                                                  if("sign off" in self.querry or"shutdown"in self.querry or"off laptop"in self.querry):
                                                        pyautogui.hotkey("win","x")
                                                        pyautogui.press("u")
                                                        pyautogui.press("u")
